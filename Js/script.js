@@ -1,71 +1,73 @@
 // Mobile menu toggle
-const mobileMenuButton = document.getElementById('mobile-menu-button');
-const mobileMenu = document.getElementById('mobile-menu');
+const mobileMenuButton = document.getElementById("mobile-menu-button");
+const mobileMenu = document.getElementById("mobile-menu");
 
-mobileMenuButton?.addEventListener('click', () => {
-  mobileMenu.classList.toggle('hidden');
+mobileMenuButton?.addEventListener("click", () => {
+  mobileMenu.classList.toggle("hidden");
 });
 
-mobileMenu?.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    mobileMenu.classList.add('hidden');
+mobileMenu?.querySelectorAll("a").forEach((link) => {
+  link.addEventListener("click", () => {
+    mobileMenu.classList.add("hidden");
   });
 });
 
 // Chat widget toggle
-const fab = document.getElementById('fab');
-const chatWidget = document.getElementById('chat-widget');
-const closeChat = document.getElementById('close-chat');
+const fab = document.getElementById("fab");
+const chatWidget = document.getElementById("chat-widget");
+const closeChat = document.getElementById("close-chat");
 
-fab?.addEventListener('click', () => {
-  chatWidget.classList.toggle('hidden');
+fab?.addEventListener("click", () => {
+  chatWidget.classList.toggle("hidden");
 });
 
-closeChat?.addEventListener('click', () => {
-  chatWidget.classList.add('hidden');
+closeChat?.addEventListener("click", () => {
+  chatWidget.classList.add("hidden");
 });
 
 // Back to top button
-const backToTop = document.getElementById('back-to-top');
-
-window.addEventListener('scroll', () => {
+const backToTop = document.getElementById("back-to-top");
+window.addEventListener("scroll", () => {
   if (window.pageYOffset > 300) {
-    backToTop?.classList.remove('hidden');
+    backToTop?.classList.remove("hidden");
   } else {
-    backToTop?.classList.add('hidden');
+    backToTop?.classList.add("hidden");
   }
 });
 
-// Smooth scrolling for all anchor links with href="#..."
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    const targetId = this.getAttribute('href');
+// Smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
+    const targetId = this.getAttribute("href");
     const targetElement = document.querySelector(targetId);
     if (targetElement) {
       e.preventDefault();
       const yOffset = -80;
-      const y = targetElement.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      window.scrollTo({ top: y, behavior: 'smooth' });
+      const y =
+        targetElement.getBoundingClientRect().top +
+        window.pageYOffset +
+        yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
     }
   });
 });
 
-
 // Particles background
 function createParticles() {
-  const container = document.getElementById('particles-container');
-  const particleCount = 30;
+  const container = document.getElementById("particles-container");
+  if (!container) return;
 
+  const particleCount = 30;
   for (let i = 0; i < particleCount; i++) {
-    const particle = document.createElement('div');
-    particle.classList.add('particle');
+    const particle = document.createElement("div");
+    particle.classList.add("particle");
     const size = Math.random() * 3 + 2;
     particle.style.width = `${size}px`;
     particle.style.height = `${size}px`;
     particle.style.left = `${Math.random() * 100}%`;
     particle.style.top = `${Math.random() * 100}%`;
     particle.style.opacity = Math.random() * 0.5 + 0.1;
-    container?.appendChild(particle);
+    container.appendChild(particle);
     animateParticle(particle);
   }
 }
@@ -83,15 +85,14 @@ function animateParticle(particle) {
       particle.style.left = `${Math.random() * 100}%`;
       particle.style.top = `${Math.random() * 100}%`;
       animateParticle(particle);
-    }
+    },
   });
 }
-
 createParticles();
 
-// 3D background with Three.js
+// Three.js 3D background
 function initThreeJS() {
-  const container = document.getElementById('canvas-container');
+  const container = document.getElementById("canvas-container");
   if (!container) return;
 
   const width = container.clientWidth;
@@ -114,7 +115,7 @@ function initThreeJS() {
     shininess: 30,
     transparent: true,
     opacity: 0.8,
-    wireframe: true
+    wireframe: true,
   });
 
   const devices = [];
@@ -139,17 +140,18 @@ function initThreeJS() {
 
   function animate() {
     requestAnimationFrame(animate);
-    devices.forEach(device => {
+    devices.forEach((device) => {
       device.rotation.x += 0.01;
       device.rotation.y += 0.01;
-      device.position.y += Math.sin(Date.now() * 0.001 + device.position.x) * 0.001;
+      device.position.y +=
+        Math.sin(Date.now() * 0.001 + device.position.x) * 0.001;
     });
     renderer.render(scene, camera);
   }
 
   animate();
 
-  window.addEventListener('resize', () => {
+  window.addEventListener("resize", () => {
     const width = container.clientWidth;
     const height = container.clientHeight;
     camera.aspect = width / height;
@@ -157,5 +159,56 @@ function initThreeJS() {
     renderer.setSize(width, height);
   });
 }
+window.addEventListener("load", initThreeJS);
 
-window.addEventListener('load', initThreeJS);
+// Send message to Firestore
+const contactForm = document.getElementById("contactForm");
+contactForm?.addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const contactForm = document.getElementById("contactForm");
+  const loadingSpinner = document.getElementById("loading-spinner");
+  const successMessage = document.getElementById("success-message");
+  const formFeedback = document.getElementById("form-feedback");
+
+  contactForm?.addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById("name")?.value;
+    const email = document.getElementById("email")?.value;
+    const subject = document.getElementById("subject")?.value;
+    const message = document.getElementById("message")?.value;
+
+    // Tampilkan loading spinner
+    formFeedback.classList.remove("hidden");
+    loadingSpinner.classList.remove("hidden");
+    successMessage.classList.add("hidden");
+
+    db.collection("messages")
+      .add({
+        name,
+        email,
+        subject,
+        message,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      })
+      .then(() => {
+        // Sembunyikan loading dan tampilkan sukses
+        loadingSpinner.classList.add("hidden");
+        successMessage.classList.remove("hidden");
+
+        contactForm.reset();
+
+        // Sembunyikan feedback setelah 3 detik
+        setTimeout(() => {
+          formFeedback.classList.add("hidden");
+          successMessage.classList.add("hidden");
+        }, 3000);
+      })
+      .catch((error) => {
+        loadingSpinner.classList.add("hidden");
+        alert("Failed to send message. Please try again.");
+        console.error("Error sending message: ", error);
+      });
+  });
+})
