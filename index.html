@@ -132,45 +132,57 @@
                     We are a student organization focused on Internet of Things technology at Politeknik Negeri Medan.
                 </p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                <div class="card-3d bg-gray-800 rounded-2xl p-8 shadow-xl">
-                    <h3 class="text-2xl font-bold mb-4 text-white">Our Vision</h3>
-                    <p class="text-gray-300 mb-6">
-                        To become a center of excellence in IoT innovation that contributes to solving real-world problems through technology.
-                    </p>
-                    <div class="flex flex-wrap gap-3">
-                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-green-400">Innovation</span>
-                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-blue-400">Technology</span>
-                        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-purple-400">Creativity</span>
-                    </div>
-                </div>
-                <div class="relative">
-                    <div class="iot-device glow bg-gray-800 rounded-2xl p-6 h-full">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 rounded-full bg-gradient-to-r from-green-400 to-blue-500 flex items-center justify-center">
-                                <i class="fas fa-bolt text-white text-xl"></i>
-                            </div>
-                            <h3 class="text-2xl font-bold ml-4 text-white">Our Mission</h3>
-                        </div>
-                        <ul class="space-y-3 text-gray-300">
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
-                                <span>Develop IoT skills among students</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
-                                <span>Create innovative IoT solutions</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
-                                <span>Collaborate with industry partners</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
-                                <span>Participate in competitions and exhibitions</span>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-stretch">
+  <!-- Our Vision Card (styled like Our Mission) -->
+  <div class="relative">
+    <div class="iot-device glow bg-gray-800 rounded-2xl p-6 h-full">
+      <div class="flex items-center mb-4">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-r from-green-400 to-blue-500 flex items-center justify-center">
+          <i class="fas fa-lightbulb text-white text-xl"></i>
+        </div>
+        <h3 class="text-2xl font-bold ml-4 text-white">Our Vision</h3>
+      </div>
+      <p class="text-gray-300 mb-6">
+        To become a center of excellence in IoT innovation that contributes to solving real-world problems through technology.
+      </p>
+      <div class="flex flex-wrap gap-3">
+        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-green-400">Innovation</span>
+        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-blue-400">Technology</span>
+        <span class="px-3 py-1 bg-gray-700 rounded-full text-sm text-purple-400">Creativity</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Our Mission Card -->
+  <div class="relative">
+    <div class="iot-device glow bg-gray-800 rounded-2xl p-6 h-full">
+      <div class="flex items-center mb-4">
+        <div class="w-12 h-12 rounded-full bg-gradient-to-r from-green-400 to-blue-500 flex items-center justify-center">
+          <i class="fas fa-bolt text-white text-xl"></i>
+        </div>
+        <h3 class="text-2xl font-bold ml-4 text-white">Our Mission</h3>
+      </div>
+      <ul class="space-y-3 text-gray-300">
+        <li class="flex items-start">
+          <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+          <span>Develop IoT skills among students</span>
+        </li>
+        <li class="flex items-start">
+          <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+          <span>Create innovative IoT solutions</span>
+        </li>
+        <li class="flex items-start">
+          <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+          <span>Collaborate with industry partners</span>
+        </li>
+        <li class="flex items-start">
+          <i class="fas fa-check-circle text-green-400 mt-1 mr-2"></i>
+          <span>Participate in competitions and exhibitions</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
                 </div>
             </div>
         </div>
@@ -418,9 +430,12 @@
       <label for="message" class="block text-gray-300 mb-2">Message</label>
       <textarea id="message" rows="4" required class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-400 text-white"></textarea>
     </div>
-    <button type="submit" class="w-full px-6 py-3 bg-gradient-to-r from-[#03004e] to-[#feb00e] text-white rounded-lg font-medium hover:opacity-90 transition-all duration-300">
-      Send Message
-    </button>
+    <button
+  type="submit"
+  class="block w-full text-center px-6 py-3 bg-gradient-to-r from-[#03004e] to-[#feb00e] text-white rounded-lg font-medium hover:opacity-90 transition-all duration-300 cursor-pointer"
+>
+  Send Message
+</button>
     <div id="form-feedback" class="mt-4 hidden text-center">
   <!-- Loading -->
   <div id="loading-spinner" class="flex justify-center items-center space-x-2">
